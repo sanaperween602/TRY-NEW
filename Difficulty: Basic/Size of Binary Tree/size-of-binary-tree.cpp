@@ -13,21 +13,13 @@ struct Node
     }
 };
 */
-void Total(Node *root ,int &count)
-{
-    if(root==NULL)
-    return;
-    count++;
-    Total(root->left,count);
-    Total(root->right,count);
-}
 
 class Solution {
   public:
     int getSize(Node* root) {
         // code here
-        int count=0;
-        Total(root,count);
-        return count;
+       if(!root)
+       return 0;
+       return (1+getSize(root->left)+getSize(root->right));
     }
 };
