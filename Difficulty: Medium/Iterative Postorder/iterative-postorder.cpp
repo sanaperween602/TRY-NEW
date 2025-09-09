@@ -8,31 +8,43 @@ struct Node {
 };*/
 class Solution {
   public:
-    vector<int> postOrder(Node* node) {
+    vector<int> postOrder(Node* root) {
         // code here
         //NODE RIGHT LEFT(NRL)THEN REVERSE--->LNR 
-        stack<Node*>s1;
-        s1.push(node);
-        vector<int>ans;
-        while(!s1.empty())
-        {
-            Node*temp=s1.top();
-            s1.pop();
-            ans.push_back(temp->data);
-            //left
-            if(temp->left)
-            {
-                s1.push(temp->left);
-                
-            }
-            //right
-            if(temp->right)
-            {
-                s1.push(temp->right);
-            }
-            
-        }
-        reverse(ans.begin(),ans.end());
-        return ans;
+      vector<int>ans;
+      while(root)
+      {
+          //if right part does't exist
+          if(!root->right)
+          {
+              ans.push_back(root->data);
+              root=root->left;
+          }
+          //else right part exist
+          else
+          {
+              Node*curr=root->right;
+              while(curr->left&&curr->left!=root)
+              curr=curr->left;
+              //we have 2 case 
+             //1st traverse nhi hua
+              if(curr->left==NULL)
+              {
+                  ans.push_back(root->data);
+                  curr->left=root;
+                  root=root->right;
+              }
+              
+               //2nd traverse ho chuka
+               else
+               {
+                   curr->left=root;
+                   root=root->left;
+               }
+              
+          }
+      }
+      reverse(ans.begin(),ans.end());
+      return ans;
     }
 };
