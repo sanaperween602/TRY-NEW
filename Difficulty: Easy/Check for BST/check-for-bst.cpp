@@ -11,30 +11,24 @@ public:
     }
 };
 */
-void inordertrav(Node *root , vector<int>&ans)
+bool BST (Node*root,int &prev)
 {
-    if(!root)
-    return;
-    
-    inordertrav(root->left,ans);
-    ans.push_back(root->data);
-    inordertrav(root->right,ans);
+    if (!root)
+    return 1;
+    bool l =BST(root->left,prev);
+    if(l==0)
+    return 0;
+    if(root->data<=prev)
+    return 0;
+    prev=root->data;
+    return BST(root->right,prev);
 }
 class Solution {
   public:
     // Function to check whether a Binary Tree is BST or not.
     bool isBST(Node* root) {
         // Your code here
-        vector<int>ans;
-        inordertrav(root,ans);
-        for(int i=1;i<ans.size();i++)
-        {
-            if(ans[i]<=ans[i-1])
-            {
-            return false;
-            }
-        }
-        
-            return true;
+        int prev=INT_MIN;
+        return BST(root,prev);
     }
 };
