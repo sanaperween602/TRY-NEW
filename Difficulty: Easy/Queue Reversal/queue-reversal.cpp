@@ -1,21 +1,17 @@
-// function Template for C++
-
 class Solution {
   public:
-    queue<int> reverseQueue(queue<int> &q) {
-        // code here.
-        stack<int>str;
-        while(!q.empty())
-        {
-            str.push(q.front());
+    void reverseQueue(queue<int> &q) {
+        // code here
+        stack<int>st;
+        while(!q.empty()){
+            st.push(q.front());
             q.pop();
         }
-        while(!str.empty())
+        while(!st.empty())
         {
-            q.push(str.top());
-            str.pop();
-            
+            q.push(st.top());
+            st.pop();
         }
-        return q;
+        
     }
 };
